@@ -6,9 +6,14 @@ import {
   Typography,
   Grid,
   CircularProgress,
+  ListItem,
+  Card,
+  List,
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
 } from '@mui/material';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
-import { useAppDispatch } from '../util/redux/hooks';
 import { login as loginRedux } from '../util/redux/userSlice';
 import { load as loadRedux } from '../util/redux/filterSlice';
 import FormGrid from '../components/form/FormGrid';
@@ -19,6 +24,8 @@ import { loginUser } from './api';
 import AlertDialog from '../components/AlertDialog';
 import PrimaryButton from '../components/buttons/PrimaryButton';
 import { getData } from '../util/api';
+import { useAppDispatch } from '../util/redux/hooks';
+import ExpansionCard from '../ExpansionCard';
 
 const styles = {
   container: {
@@ -175,6 +182,16 @@ function LoginPage() {
 
   return (
     <div>
+      {/* THESE ARE JUST RENDERING HERE FOR NOW UNTIL I CAN GET THE REAL PAGE RUNNING */}
+      <List sx={{ width: '100%' }}>
+        <ListItem sx={{ width: '100%' }}>
+          <ExpansionCard />
+        </ListItem>
+        <ListItem sx={{ width: '100%' }}>
+          <ExpansionCard />
+        </ListItem>
+      </List>
+
       {isLoading ? (
         <div style={styles.centered}>
           <CircularProgress />
