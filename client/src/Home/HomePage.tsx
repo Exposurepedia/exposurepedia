@@ -114,9 +114,7 @@ function HomePage() {
         therapy. Submissions are regularly reviewed and added, so The
         Exposurepedia is always growing. <br />
         <br /> For general ideas on modifying the difficulty of exposures, check
-        out the modifications page. If you are looking for more general
-        resources to learn more about conducting exposure therapy, the
-        (non-exhaustive) other resources page might help.
+        out the modifications page.
       </p>
     </div>
   );
