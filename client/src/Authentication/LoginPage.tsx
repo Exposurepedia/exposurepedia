@@ -185,10 +185,35 @@ function LoginPage() {
       {/* THESE ARE JUST RENDERING HERE FOR NOW UNTIL I CAN GET THE REAL PAGE RUNNING */}
       <List sx={{ width: '100%' }}>
         <ListItem sx={{ width: '100%' }}>
-          <ExpansionCard />
+          <ExpansionCard
+            exposure={{
+              name: 'my exposure',
+              disorders: [],
+              appropriateFor: 'child',
+              formats: ['option1', 'option2', 'option3', 'option4'],
+              interventionTypes: [],
+              keywords: [],
+              updatedAt: '',
+            }}
+            isBookmarked
+            isSelected
+          />
         </ListItem>
         <ListItem sx={{ width: '100%' }}>
-          <ExpansionCard />
+          <ExpansionCard
+            exposure={{
+              name: 'my exposure',
+              disorders: [],
+              appropriateFor: 'child',
+              formats: ['option1', 'option2'],
+              interventionTypes: [],
+              keywords: [],
+              updatedAt: '',
+              link: 'https://www.youtube.com/watch?v=pTSiQCYQuvA&ab_channel=JonaTiba',
+            }}
+            isBookmarked={false}
+            isSelected
+          />
         </ListItem>
       </List>
 
