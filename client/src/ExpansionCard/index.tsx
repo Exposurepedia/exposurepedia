@@ -28,9 +28,10 @@ export default function ExpansionCard() {
 
   return (
     <Card
-      sx={{ width: '100%', px: 3, py: 2 }}
+      sx={{ width: '100%', px: 3, py: 2, cursor: 'pointer' }}
       onMouseEnter={() => setCardHovered(true)}
       onMouseLeave={() => setCardHovered(false)}
+      onClick={() => setOpen((s) => !s)}
     >
       <Grid container flexDirection="column" spacing={2}>
         <Grid
@@ -60,7 +61,12 @@ export default function ExpansionCard() {
               </Collapse>
             </Grid>
             <Grid item xs={1}>
-              <IconButton size="small">
+              <IconButton
+                size="small"
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+              >
                 <LaunchIcon fontSize="small" color="primary" />
               </IconButton>
             </Grid>
@@ -74,7 +80,11 @@ export default function ExpansionCard() {
             spacing={1}
           >
             <Grid item>
-              <IconButton>
+              <IconButton
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+              >
                 {isBookmarked ? (
                   <BookmarkOutlinedIcon color="primary" />
                 ) : (
@@ -88,7 +98,11 @@ export default function ExpansionCard() {
               </IconButton>
             </Grid>
             <Grid item>
-              <IconButton>
+              <IconButton
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+              >
                 {isSelected ? (
                   <CheckBoxOutlinedIcon color="primary" />
                 ) : (
@@ -193,17 +207,15 @@ export default function ExpansionCard() {
                   ]),
             ]}
           >
-            <IconButton onClick={() => setOpen((s) => !s)}>
-              {open ? (
-                <ExpandLessIcon />
-              ) : (
-                <ExpandMoreIcon
-                  sx={{
-                    visibility: !open && cardHovered ? 'visible' : 'hidden',
-                  }}
-                />
-              )}
-            </IconButton>
+            {open ? (
+              <ExpandLessIcon />
+            ) : (
+              <ExpandMoreIcon
+                sx={{
+                  visibility: !open && cardHovered ? 'visible' : 'hidden',
+                }}
+              />
+            )}
           </Grid>
         </Grid>
       </Grid>
