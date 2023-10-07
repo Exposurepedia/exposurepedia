@@ -26,6 +26,8 @@ import PrimaryButton from '../components/buttons/PrimaryButton';
 import { getData } from '../util/api';
 import { useAppDispatch } from '../util/redux/hooks';
 import ExpansionCard from '../ExpansionCard';
+import Filters from '../Exposurepedia/Filters';
+import FilterPanel from '../Exposurepedia/FilterPanel';
 
 const styles = {
   container: {
@@ -183,6 +185,13 @@ function LoginPage() {
   return (
     <div>
       {/* THESE ARE JUST RENDERING HERE FOR NOW UNTIL I CAN GET THE REAL PAGE RUNNING */}
+      <FilterPanel
+      // filterOptions={{ filter1: ['sass'], filter2: 'me' }}
+      // setFilterOptions={(o: { filters: any }) => {
+      //   console.log('o', o);
+      // }}
+      // isLoading={false}
+      />
       <List sx={{ width: '100%' }}>
         <ListItem sx={{ width: '100%' }}>
           <ExpansionCard
