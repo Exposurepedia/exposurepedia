@@ -6,10 +6,17 @@ import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import LaunchIcon from '@mui/icons-material/Launch';
-import { Card, Collapse, Grid, IconButton, Typography } from '@mui/material';
+import {
+  Card,
+  Collapse,
+  Grid,
+  IconButton,
+  Link,
+  Typography,
+} from '@mui/material';
 import { useState } from 'react';
-import { Exposure } from './types';
 import { embedYoutubeLink, isYoutubeLink } from './utils';
+import { Exposure } from '../types';
 
 export default function ExpansionCard({
   exposure,
@@ -36,7 +43,7 @@ export default function ExpansionCard({
       onClick={() => setOpen((s) => !s)}
       elevation={2}
     >
-      <Grid container flexDirection="column" spacing={2}>
+      <Grid container flexDirection="column" spacing={1}>
         <Grid
           container
           item
@@ -56,22 +63,21 @@ export default function ExpansionCard({
             <Grid item xs={11}>
               <Collapse in={open} collapsedSize={singleLineHeight}>
                 <Typography noWrap={!open} lineHeight={`${singleLineHeight}px`}>
-                  Exposure name and/or detail that can be of an indeterminate
-                  length, spanning multiple rows of text or perhaps just one.
-                  This is the detail of the exposure that someone might use tp
-                  help a patient dealing with a disorder.
+                  {exposure.name}
                 </Typography>
               </Collapse>
             </Grid>
             <Grid item xs={1}>
-              {!isYoutube && (
+              {!isYoutube && exposure.link && (
                 <IconButton
                   size="small"
                   onClick={(e) => {
                     e.stopPropagation();
                   }}
                 >
-                  <LaunchIcon fontSize="small" color="primary" />
+                  <Link href={exposure.link} target="_blank">
+                    <LaunchIcon fontSize="small" color="primary" />
+                  </Link>
                 </IconButton>
               )}
             </Grid>
@@ -129,7 +135,7 @@ export default function ExpansionCard({
             </Typography>
           </Grid>
           <Grid item xs={12}>
-            <Collapse in={open} collapsedSize={doubleLineHeight}>
+            <Collapse in={open} collapsedSize={singleLineHeight}>
               <Typography
                 variant="body2"
                 sx={[
@@ -149,13 +155,7 @@ export default function ExpansionCard({
                       ]),
                 ]}
               >
-                This section will contain the applicable modifications that a
-                practitioner might employ to increase or decrease difficulty of
-                the exposure. This section will contain the applicable
-                modifications that a practitioner might employ to increase or
-                decrease difficulty of the exposure. This section will contain
-                the applicable modifications that a practitioner might employ to
-                increase or decrease difficulty of the exposure.
+                {exposure.modifications || 'None'}
               </Typography>
             </Collapse>
           </Grid>
@@ -169,7 +169,7 @@ export default function ExpansionCard({
           <Grid container item justifyContent="space-between">
             <Grid item xs={9}>
               <Typography variant="body2" noWrap={!open}>
-                (short hand), other?, other?, etc..
+                {exposure.formats.map((format) => format.name)}
               </Typography>
             </Grid>
           </Grid>
@@ -201,7 +201,7 @@ export default function ExpansionCard({
                 </Grid>
                 <Grid item>
                   <Typography variant="body2">
-                    option1, option2, option3, option4, option5, option6
+                    {exposure.disorders.map((disorder) => disorder.name)}
                   </Typography>
                 </Grid>
               </Grid>
@@ -213,7 +213,7 @@ export default function ExpansionCard({
                 </Grid>
                 <Grid item>
                   <Typography variant="body2">
-                    option1, option2, option3, option4, option5, option6
+                    {exposure.interventionTypes.map((itype) => itype.name)}
                   </Typography>
                 </Grid>
               </Grid>
@@ -225,7 +225,11 @@ export default function ExpansionCard({
                 </Grid>
                 <Grid item>
                   <Typography variant="body2">
-                    option1, option2, option3, option4, option5, option6
+                    {exposure.isAdultAppropriate && exposure.isChildAppropriate
+                      ? 'All'
+                      : exposure.isAdultAppropriate
+                      ? 'Adults'
+                      : 'Children'}
                   </Typography>
                 </Grid>
               </Grid>

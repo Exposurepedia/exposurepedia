@@ -192,39 +192,6 @@ function LoginPage() {
       // }}
       // isLoading={false}
       />
-      <List sx={{ width: '100%' }}>
-        <ListItem sx={{ width: '100%' }}>
-          <ExpansionCard
-            exposure={{
-              name: 'my exposure',
-              disorders: [],
-              appropriateFor: 'child',
-              formats: ['option1', 'option2', 'option3', 'option4'],
-              interventionTypes: [],
-              keywords: [],
-              updatedAt: '',
-            }}
-            isBookmarked
-            isSelected
-          />
-        </ListItem>
-        <ListItem sx={{ width: '100%' }}>
-          <ExpansionCard
-            exposure={{
-              name: 'my exposure',
-              disorders: [],
-              appropriateFor: 'child',
-              formats: ['option1', 'option2'],
-              interventionTypes: [],
-              keywords: [],
-              updatedAt: '',
-              link: 'https://www.youtube.com/watch?v=pTSiQCYQuvA&ab_channel=JonaTiba',
-            }}
-            isBookmarked={false}
-            isSelected
-          />
-        </ListItem>
-      </List>
 
       {isLoading ? (
         <div style={styles.centered}>

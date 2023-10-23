@@ -5,6 +5,7 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'import/prefer-default-export': 0,
     'react/require-default-props': 0,
+    'no-nested-ternary': 0,
     'no-console': 'warn',
     '@typescript-eslint/no-unused-vars': ['warn'],
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
