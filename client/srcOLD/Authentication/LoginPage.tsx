@@ -6,9 +6,14 @@ import {
   Typography,
   Grid,
   CircularProgress,
+  ListItem,
+  Card,
+  List,
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
 } from '@mui/material';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
-import { useAppDispatch } from '../util/redux/hooks';
 import { login as loginRedux } from '../util/redux/userSlice';
 import { load as loadRedux } from '../util/redux/filterSlice';
 import FormGrid from '../components/form/FormGrid';
@@ -19,6 +24,10 @@ import { loginUser } from './api';
 import AlertDialog from '../components/AlertDialog';
 import PrimaryButton from '../components/buttons/PrimaryButton';
 import { getData } from '../util/api';
+import { useAppDispatch } from '../util/redux/hooks';
+import ExpansionCard from '../ExpansionCard';
+import Filters from '../Exposurepedia/Filters';
+import FilterPanel from '../Exposurepedia/FilterPanel';
 
 const styles = {
   container: {
@@ -175,6 +184,15 @@ function LoginPage() {
 
   return (
     <div>
+      {/* THESE ARE JUST RENDERING HERE FOR NOW UNTIL I CAN GET THE REAL PAGE RUNNING */}
+      <FilterPanel
+      // filterOptions={{ filter1: ['sass'], filter2: 'me' }}
+      // setFilterOptions={(o: { filters: any }) => {
+      //   console.log('o', o);
+      // }}
+      // isLoading={false}
+      />
+
       {isLoading ? (
         <div style={styles.centered}>
           <CircularProgress />

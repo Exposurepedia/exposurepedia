@@ -1,8 +1,8 @@
 export enum appRoutes {
-  landing = '',
+  home = '',
   about = 'about',
   contact = 'contact',
-  register = 'register',
+  signup = 'signup',
   login = 'login',
   exposurepedia = 'exposurepedia',
   hierarchies = 'hierarchies',
@@ -10,10 +10,10 @@ export enum appRoutes {
 }
 
 export const AppRouteLabels = {
-  [appRoutes.landing]: 'Home',
+  [appRoutes.home]: 'Home',
   [appRoutes.about]: 'About',
   [appRoutes.contact]: 'Contact Us',
-  [appRoutes.register]: 'Sign Up',
+  [appRoutes.signup]: 'Sign Up',
   [appRoutes.login]: 'Login',
   [appRoutes.exposurepedia]: 'Exposurepedia',
   [appRoutes.hierarchies]: 'Hierarchies',
@@ -21,10 +21,10 @@ export const AppRouteLabels = {
 };
 
 export const publicNavBarRoutes = [
-  appRoutes.landing,
+  appRoutes.home,
   appRoutes.about,
   appRoutes.contact,
-  appRoutes.register,
+  appRoutes.signup,
   appRoutes.login,
 ];
 export const authorizedNavBarRoutes = [

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
-import { CircularProgress } from '@mui/material';
+import { CircularProgress, List, ListItem } from '@mui/material';
 import Toolbar from '@mui/material/Toolbar';
 import { ExposureItemTable, TRow } from './ExposureItemTable';
 import HierarchyDropdown from './HierarchyDropdown';
@@ -12,6 +12,7 @@ import { useAppSelector } from '../util/redux/hooks';
 import { selectUser } from '../util/redux/userSlice';
 import GeneralSearch from './GeneralSearch';
 import { selectFilters } from '../util/redux/filterSlice';
+import ExpansionCard from '../ExpansionCard';
 
 /**
  * A page only accessible to authenticated users that display exposure items in
@@ -151,19 +152,29 @@ function Exposurepedia() {
             {isLoadingTable ? (
               <CircularProgress />
             ) : (
-              <ExposureItemTable
-                rows={rows}
-                columns={columns}
-                isApprove={false}
-                isBroken={false}
-                setCount={setCount}
-                selectedRows={selectedRows}
-                setSelectedRows={setSelectedRows}
-                sortColumn={sortColumn}
-                setSortColumn={setSortColumn}
-                sortDirection={sortDirection}
-                setSortDirection={setSortDirection}
-              />
+              <List sx={{ maxWidth: '1000px' }}>
+                {rows.map((row) => (
+                  <ListItem
+                    // key={row._id}
+                    sx={{ width: '100%' }}
+                  >
+                    <ExpansionCard exposure={row} isBookmarked isSelected />
+                  </ListItem>
+                ))}
+              </List>
+              // <ExposureItemTable
+              //   rows={rows}
+              //   columns={columns}
+              //   isApprove={false}
+              //   isBroken={false}
+              //   setCount={setCount}
+              //   selectedRows={selectedRows}
+              //   setSelectedRows={setSelectedRows}
+              //   sortColumn={sortColumn}
+              //   setSortColumn={setSortColumn}
+              //   sortDirection={sortDirection}
+              //   setSortDirection={setSortDirection}
+              // />
             )}
           </div>
         </Box>
