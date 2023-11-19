@@ -2,6 +2,7 @@ module.exports = {
   extends: ['airbnb-typescript-prettier'],
   root: true,
   rules: {
+    'react/jsx-props-no-spreading': 'off',
     'react/function-component-definition': [
       2,
       {

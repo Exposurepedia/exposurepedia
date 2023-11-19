@@ -2,17 +2,10 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import resolve from './resolve';
 import { ResolvedReq } from './types';
-import { URLPREFIX } from './url';
+import { getData } from './getData';
 
-/**
- * A function which makes a GET request to the server when given a url and returns the response data after it is resolved by the {@link resolve} function.
- * @param url - a string representing the url to make the request to. The format should be 'router/endpoint'
- * @returns the response data from the server
- */
-async function getData(url: string) {
-  const response = await resolve(axios.get(`${URLPREFIX}/${url}`));
-  return response;
-}
+// So cookies can be sent automatically with requests
+axios.defaults.withCredentials = true;
 
 /**
  * A custom hook which makes a GET request to the server when given a url and returns the response data after it is resolved by the {@link resolve} function.
