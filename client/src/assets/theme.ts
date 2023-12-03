@@ -2,23 +2,25 @@
  * A file for defining the global MUI theme used in the project.
  */
 import { createTheme } from '@mui/material/styles';
-import COLORS from './colors';
 import 'typeface-hk-grotesk';
 
 // https://github.com/hack4impact/chapter-website-template/blob/main/public/style.css
 export const theme = createTheme({
   palette: {
     primary: {
-      main: COLORS.primaryBlue,
+      light: '#F2F7FA',
+      main: '#328ed8',
+      dark: '#0F1C27'
     },
     secondary: {
-      main: COLORS.secondarySeafoam,
+      main: '#FDB833',
     },
     contrastThreshold: 3,
     tonalOffset: 0.2,
   },
   typography: {
     fontFamily: [
+      'GT Walsheim Pro',
       'HK Grotesk',
       '-apple-system',
       'BlinkMacSystemFont',

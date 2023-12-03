@@ -24,8 +24,6 @@ export const publicNavBarRoutes = [
   appRoutes.home,
   appRoutes.about,
   appRoutes.contact,
-  appRoutes.signup,
-  appRoutes.login,
 ];
 export const authorizedNavBarRoutes = [
   appRoutes.exposurepedia,

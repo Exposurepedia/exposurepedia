@@ -78,7 +78,7 @@ export function CustomAutocomplete<Opt extends anObject>({
         : d[idKey] === props.value;
     }) || null;
   return (
-    <Autocomplete<Opt>
+    <Autocomplete<Opt, false, false, false>
       {...props}
       disableClearable={overrideDisableClearable as undefined} // Hack to allow disableClearable without overhauling the CustomAutocomplete types
       fullWidth={fullWidth}
@@ -265,8 +265,8 @@ export function CustomAutocompleteMultiple<Opt extends anObject>({
                       return;
                     }
                     if (
-                      destination.droppableId == source.droppableId &&
-                      destination.index == source.index
+                      destination.droppableId === source.droppableId &&
+                      destination.index === source.index
                     ) {
                       return;
                     }

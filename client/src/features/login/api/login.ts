@@ -15,7 +15,7 @@ export async function loginUser(email: string, password: string) {
   });
   // const resFilters = await getData('exposure/filterOptions');
 
-  if (res.error) {
+  if (res.error && 'message' in res.error) {
     throw Error(res.error.message);
   }
   // if (resFilters.error) {
