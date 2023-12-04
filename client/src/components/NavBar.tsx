@@ -1,4 +1,7 @@
 import React from 'react';
+import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
+import LogoutIcon from '@mui/icons-material/Logout';
+import PersonIcon from '@mui/icons-material/Person';
 import { Button, Grid, IconButton, Typography } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import { Link } from 'react-router-dom';
@@ -9,9 +12,7 @@ import {
   authorizedNavBarRoutes,
   publicNavBarRoutes,
 } from '../routes/appRoutes';
-import { Box } from '@mui/system';
-import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
-import PersonIcon from '@mui/icons-material/Person';
+import { PopupMenu } from './PopupMenu';
 
 export function NavBar() {
   const { isAuthorized } = useAuthStatus();
@@ -66,11 +67,25 @@ export function NavBar() {
                 </IconButton>
               </Grid>
               <Grid item>
-                <IconButton>
-                  <PersonIcon
-                    sx={(theme) => ({ color: theme.palette.common.white })}
-                  />
-                </IconButton>
+                <PopupMenu
+                  menuItems={[
+                    { id: 'logout', text: 'Logout', Icon: LogoutIcon },
+                  ]}
+                  onSelect={(type) => {
+                    if (type === 'logout') {
+                      // NEED TO IMPLEMENT THIS NEXT
+                      //
+                    }
+                  }}
+                >
+                  {(handleClick) => (
+                    <IconButton onClick={handleClick}>
+                      <PersonIcon
+                        sx={(theme) => ({ color: theme.palette.common.white })}
+                      />
+                    </IconButton>
+                  )}
+                </PopupMenu>
               </Grid>
             </>
           ) : (

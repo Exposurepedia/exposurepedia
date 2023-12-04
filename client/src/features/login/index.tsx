@@ -1,10 +1,15 @@
-import { Alert, Button, Grid, Typography } from '@mui/material';
+import React from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import React, { useState } from 'react';
-import { z } from 'zod';
+import { Alert, Button, Grid } from '@mui/material';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { loginUser } from './api';
+import { useNavigate } from 'react-router-dom';
+import { z } from 'zod';
 import { TextHookForm } from '../../components';
+import { PageShell } from '../../components/PageShell';
+import { appRoutes } from '../../routes';
+import { loginUser } from './api';
+import { useUserStore } from '../../stores/userStore';
 
 export const schema = z
   .object({
@@ -14,31 +19,23 @@ export const schema = z
   .passthrough();
 
 export default function LoginPage() {
+  const nav = useNavigate();
   const { control, handleSubmit } = useForm({
     resolver: zodResolver(schema),
   });
   const [error, setError] = useState<string>();
+  const setUser = useUserStore((state) => state.setCurrentUser);
 
   const onSubmit = handleSubmit(async (values) => {
     try {
       const user = await loginUser(values.email, values.password);
-      // dispatchUser(user.email!, user.firstName!, user.lastName!, user.admin!);
-      console.log('user', user);
+      setUser(user);
+      nav(`/${appRoutes.hierarchies}`);
     } catch (e) {
       if (e && typeof e === 'object' && 'message' in e) {
-        setError(JSON.stringify(e.message));
+        setError(JSON.stringify((e as { message: string }).message));
       }
     }
-
-    // try {
-    //   const res = await getData('exposure/filterOptions');
-    //   dispatchFilters(res.data);
-    //   window.location.reload();
-    //   navigate('/home');
-    // } catch (e: any) {
-    //   setShowError('alert', true);
-    //   setErrorMessage('alert', e.message);
-    // }
   });
 
   return (
@@ -48,17 +45,7 @@ export default function LoginPage() {
         onSubmit(e);
       }}
     >
-      <Grid
-        container
-        direction="column"
-        alignItems="center"
-        justifyContent="center"
-        spacing={7}
-      >
-        <Grid item>
-          <Typography variant="h2">Login</Typography>
-        </Grid>
-
+      <PageShell header="Login">
         <Grid
           item
           container
@@ -97,7 +84,7 @@ export default function LoginPage() {
 
           <Grid item>Forgot password?</Grid>
         </Grid>
-      </Grid>
+      </PageShell>
     </form>
   );
 }
