@@ -1,11 +1,12 @@
 import React from 'react';
+import { useQueryClient } from 'react-query';
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
 import PersonIcon from '@mui/icons-material/Person';
 import { Button, Grid, IconButton, Typography } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
-import { Link } from 'react-router-dom';
-import { useAuthStatus } from '../api';
+import { Link, useNavigate } from 'react-router-dom';
+import { authStatusQueryKey, useAuthStatus } from '../api';
 import {
   AppRouteLabels,
   appRoutes,
@@ -13,10 +14,16 @@ import {
   publicNavBarRoutes,
 } from '../routes/appRoutes';
 import { PopupMenu } from './PopupMenu';
+import { logout } from '../features/login/api';
+import { useUserStore } from '../stores/userStore';
 
 export function NavBar() {
   const { isAuthorized } = useAuthStatus();
   const routes = isAuthorized ? authorizedNavBarRoutes : publicNavBarRoutes;
+  const setUser = useUserStore((state) => state.setCurrentUser);
+  const nav = useNavigate();
+  const queryClient = useQueryClient();
+
   return (
     <AppBar
       position="sticky"
@@ -71,10 +78,12 @@ export function NavBar() {
                   menuItems={[
                     { id: 'logout', text: 'Logout', Icon: LogoutIcon },
                   ]}
-                  onSelect={(type) => {
+                  onSelect={async (type) => {
                     if (type === 'logout') {
-                      // NEED TO IMPLEMENT THIS NEXT
-                      //
+                      await logout();
+                      setUser(undefined);
+                      queryClient.invalidateQueries(authStatusQueryKey);
+                      nav(`/${appRoutes.login}`);
                     }
                   }}
                 >

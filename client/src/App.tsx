@@ -13,6 +13,8 @@ import HomePage from './features/home';
 import LoginPage from './features/login';
 import SignupPage from './features/signup';
 import { appRoutes } from './routes';
+import { QueryClientProvider } from 'react-query';
+import { appQueryClient } from './lib';
 
 const AppShell = () => {
   return (
@@ -53,9 +55,11 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <ThemeProvider theme={theme}>
-          <CssBaseline>
-            <AppRoutes />
-          </CssBaseline>
+          <QueryClientProvider client={appQueryClient}>
+            <CssBaseline>
+              <AppRoutes />
+            </CssBaseline>
+          </QueryClientProvider>
         </ThemeProvider>
       </BrowserRouter>
     </div>

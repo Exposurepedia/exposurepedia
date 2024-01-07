@@ -21,7 +21,6 @@ const useData = (url: string) => {
     };
 
     fetchData();
-    // getData(url).then((res) => setData(res.data));
   }, [url]);
 
   return data;

@@ -8,10 +8,7 @@ import { User } from '../../../types';
  * @throws An {@link Error} with a `messsage` field describing the issue in verifying
  * @returns {User}
  */
-export async function loginUser(
-  email: string,
-  password: string,
-): Promise<User> {
+export async function login(email: string, password: string): Promise<User> {
   const lowercaseEmail = email.toLowerCase();
   const res = await postData('auth/login', {
     email: lowercaseEmail,

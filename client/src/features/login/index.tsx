@@ -8,8 +8,10 @@ import { z } from 'zod';
 import { TextHookForm } from '../../components';
 import { PageShell } from '../../components/PageShell';
 import { appRoutes } from '../../routes';
-import { loginUser } from './api';
+import { login } from './api';
 import { useUserStore } from '../../stores/userStore';
+import { authStatusQueryKey, useAuthStatus } from '../../api';
+import { useQueryClient } from 'react-query';
 
 export const schema = z
   .object({
@@ -25,11 +27,13 @@ export default function LoginPage() {
   });
   const [error, setError] = useState<string>();
   const setUser = useUserStore((state) => state.setCurrentUser);
+  const queryClient = useQueryClient();
 
   const onSubmit = handleSubmit(async (values) => {
     try {
-      const user = await loginUser(values.email, values.password);
+      const user = await login(values.email, values.password);
       setUser(user);
+      queryClient.invalidateQueries(authStatusQueryKey);
       nav(`/${appRoutes.hierarchies}`);
     } catch (e) {
       if (e && typeof e === 'object' && 'message' in e) {

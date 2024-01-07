@@ -12,5 +12,8 @@ axios.defaults.withCredentials = true;
  */
 export async function getData(url: string) {
   const response = await resolve(axios.get(`${URLPREFIX}/${url}`));
+  if (response.error) {
+    throw response.error;
+  }
   return response;
 }
